@@ -1,0 +1,504 @@
+basePath: /api/v1
+definitions:
+  merchant.Accounts:
+    properties:
+      account:
+        type: string
+      balance:
+        type: string
+      currency:
+        type: string
+      typeAcc:
+        type: string
+    type: object
+  merchant.Rates:
+    properties:
+      buyRate:
+        type: string
+      currency:
+        type: string
+      sellRate:
+        type: string
+    type: object
+  merchant.Transactions:
+    properties:
+      accDtNumber:
+        type: string
+      accKtNumber:
+        type: string
+      dateProcess:
+        type: string
+      docId:
+        type: string
+      docState:
+        type: string
+      nazn:
+        type: string
+      recipientName:
+        type: string
+      senderName:
+        type: string
+      summa:
+        type: string
+      transType:
+        type: string
+    type: object
+  models.ConversionRequest:
+    properties:
+      accFrom:
+        type: string
+      accTo:
+        type: string
+      amount:
+        type: number
+      dest:
+        type: string
+    type: object
+  models.ConversionResponse:
+    properties:
+      docID:
+        type: string
+      msg:
+        $ref: '#/definitions/models.ErrorModel'
+    type: object
+  models.ErrorModel:
+    properties:
+      errorCode:
+        type: integer
+      errorDescription:
+        type: string
+    type: object
+  models.ErrorResponse:
+    properties:
+      errorCode:
+        type: integer
+      errorDescription:
+        type: string
+      response: {}
+    type: object
+  models.GetAccountsResponse:
+    properties:
+      accounts:
+        $ref: '#/definitions/merchant.Accounts'
+      merchName:
+        type: string
+      msg:
+        $ref: '#/definitions/models.ErrorModel'
+    type: object
+  models.GetAllAmountsResponse:
+    properties:
+      balance:
+        type: number
+      merchName:
+        type: string
+      msg:
+        $ref: '#/definitions/models.ErrorModel'
+    type: object
+  models.GetExchangeRatesResponse:
+    properties:
+      base:
+        type: string
+      msg:
+        $ref: '#/definitions/models.ErrorModel'
+      rates:
+        $ref: '#/definitions/merchant.Rates'
+    type: object
+  models.GetLimitConversion:
+    properties:
+      currentLimit:
+        type: number
+      msg:
+        $ref: '#/definitions/models.ErrorModel'
+    type: object
+  models.GetTransactionResponse:
+    properties:
+      merchName:
+        type: string
+      msg:
+        $ref: '#/definitions/models.ErrorModel'
+      trnList:
+        $ref: '#/definitions/merchant.Transactions'
+    type: object
+  models.Login:
+    properties:
+      password:
+        type: string
+      phone:
+        maxLength: 9
+        minLength: 9
+        type: string
+    type: object
+  models.LoginResponse:
+    properties:
+      msg:
+        $ref: '#/definitions/models.ErrorModel'
+      response:
+        $ref: '#/definitions/models.twoFa'
+    type: object
+  models.OTP:
+    properties:
+      expirition:
+        type: integer
+      isActive:
+        type: boolean
+      totalSent:
+        type: integer
+    type: object
+  models.Token:
+    properties:
+      refreshToken:
+        type: string
+      role:
+        type: string
+      token:
+        type: string
+    type: object
+  models.googleAuth:
+    properties:
+      isActive:
+        type: boolean
+    type: object
+  models.smsOTP:
+    properties:
+      isActive:
+        type: boolean
+    type: object
+  models.twoFa:
+    properties:
+      googleAuthenticator:
+        $ref: '#/definitions/models.googleAuth'
+      smsOtp:
+        $ref: '#/definitions/models.smsOTP'
+    type: object
+host: localhost:8070
+info:
+  contact: {}
+  description: This is a B2B-API server.
+  title: B2B Example API
+  version: "1.0"
+paths:
+  /2fa/confirm-google-totp:
+    get:
+      description: Google-Authenticator Confirmation
+      parameters:
+      - description: ' '
+        format: UUID
+        in: header
+        name: X-Request-Id
+        required: true
+        type: string
+      - description: ' '
+        format: uint
+        in: header
+        name: otp
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.Token'
+        "303":
+          description: See Other
+          schema:
+            $ref: '#/definitions/models.ErrorResponse'
+      summary: Google-Authenticator Confirmation route
+      tags:
+      - 2FA
+  /2fa/confirm-sms-otp:
+    get:
+      description: SMS Confirmation
+      parameters:
+      - description: ' '
+        format: UUID
+        in: header
+        name: X-Request-Id
+        required: true
+        type: string
+      - description: ' '
+        format: uint
+        in: header
+        name: otp
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.Token'
+        "303":
+          description: See Other
+          schema:
+            $ref: '#/definitions/models.ErrorResponse'
+      summary: SMS Confirmation route
+      tags:
+      - 2FA
+  /2fa/send-sms-otp:
+    get:
+      description: SMS sender
+      parameters:
+      - description: ' '
+        format: UUID
+        in: header
+        name: X-Request-Id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.OTP'
+        "303":
+          description: See Other
+          schema:
+            $ref: '#/definitions/models.ErrorResponse'
+      summary: SMS sender route
+      tags:
+      - 2FA
+  /auth/login:
+    post:
+      consumes:
+      - application/json
+      description: Authentication
+      parameters:
+      - description: authentication
+        format: json
+        in: body
+        name: authentication
+        required: true
+        schema:
+          $ref: '#/definitions/models.Login'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.LoginResponse'
+        "303":
+          description: See Other
+          schema:
+            $ref: '#/definitions/models.ErrorResponse'
+      summary: Authentication route
+      tags:
+      - Authentication
+  /merchant/2fa-init:
+    get:
+      consumes:
+      - application/json
+      description: TwoFAInit
+      parameters:
+      - description: ' '
+        format: UUID
+        in: header
+        name: token
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.LoginResponse'
+        "303":
+          description: See Other
+          schema:
+            $ref: '#/definitions/models.ErrorResponse'
+      summary: TwoFAInit route
+      tags:
+      - Merchant
+  /merchant/conversion:
+    post:
+      consumes:
+      - application/json
+      description: Conversion
+      parameters:
+      - description: ' '
+        format: UUID
+        in: header
+        name: token
+        required: true
+        type: string
+      - description: conversion
+        format: json
+        in: body
+        name: conversion
+        required: true
+        schema:
+          $ref: '#/definitions/models.ConversionRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.ConversionResponse'
+        "303":
+          description: See Other
+          schema:
+            $ref: '#/definitions/models.ErrorResponse'
+      summary: Conversion route
+      tags:
+      - Merchant
+  /merchant/get-accounts:
+    get:
+      consumes:
+      - application/json
+      description: GetAccounts
+      parameters:
+      - description: ' '
+        format: UUID
+        in: header
+        name: token
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.GetAccountsResponse'
+        "303":
+          description: See Other
+          schema:
+            $ref: '#/definitions/models.ErrorResponse'
+      summary: GetAccounts route
+      tags:
+      - Merchant
+  /merchant/get-all-amount:
+    get:
+      consumes:
+      - application/json
+      description: GetAllAmount
+      parameters:
+      - description: ' '
+        format: UUID
+        in: header
+        name: token
+        required: true
+        type: string
+      - description: ' '
+        format: json
+        in: query
+        name: currency
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.GetAllAmountsResponse'
+        "303":
+          description: See Other
+          schema:
+            $ref: '#/definitions/models.ErrorResponse'
+      summary: GetAllAmount route
+      tags:
+      - Merchant
+  /merchant/get-limit-conversion:
+    get:
+      consumes:
+      - application/json
+      description: GetLimitConversion
+      parameters:
+      - description: ' '
+        format: UUID
+        in: header
+        name: token
+        required: true
+        type: string
+      - description: ' '
+        format: json
+        in: query
+        name: currency
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.GetLimitConversion'
+        "303":
+          description: See Other
+          schema:
+            $ref: '#/definitions/models.ErrorResponse'
+      summary: GetLimitConversion route
+      tags:
+      - Merchant
+  /merchant/get-rates:
+    get:
+      consumes:
+      - application/json
+      description: GetExchangeRates
+      parameters:
+      - description: ' '
+        format: UUID
+        in: header
+        name: token
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.GetExchangeRatesResponse'
+        "303":
+          description: See Other
+          schema:
+            $ref: '#/definitions/models.ErrorResponse'
+      summary: GetExchangeRates route
+      tags:
+      - Merchant
+  /merchant/get-transactions:
+    get:
+      consumes:
+      - application/json
+      description: GetTransactions
+      parameters:
+      - description: ' '
+        format: UUID
+        in: header
+        name: token
+        required: true
+        type: string
+      - description: ' '
+        format: json
+        in: query
+        name: dateFrom
+        required: true
+        type: string
+      - description: ' '
+        format: json
+        in: query
+        name: dateTo
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.GetTransactionResponse'
+        "303":
+          description: See Other
+          schema:
+            $ref: '#/definitions/models.ErrorResponse'
+      summary: GetTransactions route
+      tags:
+      - Merchant
+swagger: "2.0"
