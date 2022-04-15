@@ -50,6 +50,7 @@ func NewRouter(d dependencies) {
 	generalMiddleware := []mux.MiddlewareFunc{
 		d.MW.Cors,
 		d.MW.SetRequestID,
+		d.MW.Log,
 	}
 
 	// auth routes

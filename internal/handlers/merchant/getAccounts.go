@@ -20,6 +20,7 @@ func (mh merchHandler) GetAccounts() http.HandlerFunc {
 		ctx := r.Context()
 		token := r.Header.Get("token")
 		if len(token) == 0 {
+			mh.svc.LoggerInstance().Error("%v", response.TokenIsEmpty)
 			response.ToJson(w, http.StatusSeeOther, response.TokenIsEmpty)
 			return
 		}
