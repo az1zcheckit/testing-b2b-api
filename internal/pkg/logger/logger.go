@@ -24,7 +24,7 @@ func newLogger(d dependencies) ILogger {
 	core := zapcore.NewCore(getEncoder(), getWriter(), level)
 
 	log := zap.New(core, zap.AddCaller(), zap.AddCallerSkip(1))
-	defer log.Sync()
+	defer log.Sync() // todo УБРАТЬ ЭТО
 
 	return &logger{lg: log.Sugar(), CFG: d.CFG}
 }

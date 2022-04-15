@@ -12,6 +12,7 @@ type IMiddleware interface {
 	SetRequestID(next http.Handler) http.Handler
 	TokenValidator(next http.Handler) http.Handler
 	Cors(next http.Handler) http.Handler
+	Log(next http.Handler) http.Handler
 }
 
 type dependencies struct {
