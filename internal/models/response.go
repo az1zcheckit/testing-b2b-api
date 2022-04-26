@@ -68,7 +68,6 @@ func (r ErrorResponse) toJson() string {
 }
 
 func ToJson(w http.ResponseWriter, status int, data interface{}) {
-
 	reply, err := json.Marshal(&data)
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)

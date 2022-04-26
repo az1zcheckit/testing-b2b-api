@@ -18,11 +18,12 @@ const (
 	JWTSault string = "this-is-jwt-sault"
 )
 
-func Logger(ctx context.Context, log func(format string, v ...interface{}), method string, service string, requestID string, v ...interface{}) {
+func Logger(ctx context.Context, log func(format string, v ...interface{}), method string, service string, requestID string, v ...interface{}) (info string) {
 	if ctx.Err() != context.Canceled {
 		logTxt := fmt.Sprintf("%s -> %s ::: %s --> %v", method, service, requestID, v)
 		log("%s", logTxt)
 	}
+	return info
 }
 
 func GenerateSession(token string) (session string) {

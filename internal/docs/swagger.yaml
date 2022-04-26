@@ -20,6 +20,27 @@ definitions:
       sellRate:
         type: string
     type: object
+  merchant.Transaction:
+    properties:
+      accFrom:
+        type: string
+      accTo:
+        type: string
+      amount:
+        type: string
+      createdDate:
+        type: string
+      paymentPurpose:
+        type: string
+      proceedDate:
+        type: string
+      recipientName:
+        type: string
+      transId:
+        type: string
+      transType:
+        type: string
+    type: object
   merchant.Transactions:
     properties:
       accDtNumber:
@@ -109,6 +130,15 @@ definitions:
         type: number
       msg:
         $ref: '#/definitions/models.ErrorModel'
+    type: object
+  models.GetTransactionByIdResponse:
+    properties:
+      msg:
+        $ref: '#/definitions/models.ErrorModel'
+      transId:
+        type: string
+      trnList:
+        $ref: '#/definitions/merchant.Transaction'
     type: object
   models.GetTransactionResponse:
     properties:
@@ -461,6 +491,38 @@ paths:
           schema:
             $ref: '#/definitions/models.ErrorResponse'
       summary: GetExchangeRates route
+      tags:
+      - Merchant
+  /merchant/get-transaction-by-id:
+    get:
+      consumes:
+      - application/json
+      description: GetTransactionByID
+      parameters:
+      - description: ' '
+        format: UUID
+        in: header
+        name: token
+        required: true
+        type: string
+      - description: ' '
+        format: json
+        in: query
+        name: transId
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.GetTransactionByIdResponse'
+        "303":
+          description: See Other
+          schema:
+            $ref: '#/definitions/models.ErrorResponse'
+      summary: GetTransactionByID route
       tags:
       - Merchant
   /merchant/get-transactions:

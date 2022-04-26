@@ -78,6 +78,12 @@ type GetTransactionResponse struct {
 	Msg       ErrorModel            `json:"msg"`
 }
 
+type GetTransactionByIdResponse struct {
+	TransId string               `json:"transId"`
+	TrnList merchant.Transaction `json:"trnList"`
+	Msg     ErrorModel           `json:"msg"`
+}
+
 type GetLimitConversion struct {
 	CurrentLimit float64    `json:"currentLimit"`
 	Msg          ErrorModel `json:"msg"`

@@ -5,14 +5,40 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e3a87224-bcdc-4efe-ac29-0345716f3f97" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/internal/middleware/logReq.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/internal/handlers/merchant/getTransactionByID.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/internal/pkg/repository/merchant/getTransactionByID.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/internal/config/config.json" beforeDir="false" afterPath="$PROJECT_DIR$/internal/config/config.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/internal/docs/docs.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/docs/docs.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/internal/docs/swagger.json" beforeDir="false" afterPath="$PROJECT_DIR$/internal/docs/swagger.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/internal/docs/swagger.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/internal/docs/swagger.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/internal/handlers/authentication/authentication.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/handlers/authentication/authentication.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/internal/handlers/authentication/gAuth.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/handlers/authentication/gAuth.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/internal/handlers/authentication/handler.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/handlers/authentication/handler.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/internal/handlers/authentication/smsOtp.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/handlers/authentication/smsOtp.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/internal/handlers/authentication/smsOtpConfirmation.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/handlers/authentication/smsOtpConfirmation.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/internal/handlers/merchant/conversion.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/handlers/merchant/conversion.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/internal/handlers/merchant/getAccounts.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/handlers/merchant/getAccounts.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/internal/handlers/merchant/getAllAmount.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/handlers/merchant/getAllAmount.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/internal/handlers/merchant/getExchangeRates.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/handlers/merchant/getExchangeRates.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/internal/handlers/merchant/getLimitConversion.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/handlers/merchant/getLimitConversion.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/internal/handlers/merchant/getTransaction.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/handlers/merchant/getTransaction.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/internal/handlers/merchant/handler.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/handlers/merchant/handler.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/internal/handlers/merchant/twoFAInit.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/handlers/merchant/twoFAInit.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/internal/middleware/logReq.go" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/internal/middleware/middleware.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/middleware/middleware.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/internal/middleware/tokenValidator.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/middleware/tokenValidator.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/internal/models/merchant/transaction.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/models/merchant/transaction.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/internal/models/response.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/models/response.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/internal/models/swagger.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/models/swagger.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/internal/pkg/logger/logger.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/pkg/logger/logger.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/internal/pkg/repository/merchant/conversion.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/pkg/repository/merchant/conversion.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/internal/pkg/repository/merchant/getAccounts.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/pkg/repository/merchant/getAccounts.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/internal/pkg/repository/merchant/getAllAmount.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/pkg/repository/merchant/getAllAmount.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/internal/pkg/repository/merchant/getExchangeRates.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/pkg/repository/merchant/getExchangeRates.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/internal/pkg/repository/merchant/getLimitConversion.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/pkg/repository/merchant/getLimitConversion.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/internal/pkg/repository/merchant/getTransactions.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/pkg/repository/merchant/getTransactions.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/internal/pkg/repository/merchant/repository.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/pkg/repository/merchant/repository.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/internal/pkg/utils/utils.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/pkg/utils/utils.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/internal/router/router.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/router/router.go" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -27,7 +53,7 @@
       </list>
     </option>
   </component>
-  <component name="GOROOT" url="file://$PROJECT_DIR$/../../../../Program Files/Go" />
+  <component name="GOROOT" url="file://$PROJECT_DIR$/../../../../../Go" />
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
@@ -36,12 +62,25 @@
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+  <component name="GitSEFilterConfiguration">
+    <file-type-list>
+      <filtered-out-file-type name="LOCAL_BRANCH" />
+      <filtered-out-file-type name="REMOTE_BRANCH" />
+      <filtered-out-file-type name="TAG" />
+      <filtered-out-file-type name="COMMIT_BY_MESSAGE" />
+    </file-type-list>
+  </component>
   <component name="GoLibraries">
     <option name="urls">
       <list>
         <option value="file://$USER_HOME$" />
       </list>
     </option>
+  </component>
+  <component name="JsbtTreeLayoutManager">
+    <layout place="tools.popupGrunt">
+      <scroll-view-position x="0" y="0" />
+    </layout>
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
@@ -69,7 +108,7 @@
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
     <property name="node.js.selected.package.tslint" value="(autodetect)" />
-    <property name="settings.editor.selected.configurable" value="com.goide.configuration.GoLibrariesConfigurableProvider" />
+    <property name="settings.editor.selected.configurable" value="go.sdk" />
   </component>
   <component name="RunManager">
     <configuration default="true" type="GoApplicationRunConfiguration" factoryName="Go Application">
@@ -123,5 +162,126 @@
   </component>
   <component name="VgoProject">
     <integration-enabled>true</integration-enabled>
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="DlvLineBreakpoint">
+          <url>file://$PROJECT_DIR$/internal/pkg/repository/merchant/getTransactionByID.go</url>
+          <line>12</line>
+          <option name="timeStamp" value="12" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DlvLineBreakpoint">
+          <url>file://$PROJECT_DIR$/internal/pkg/repository/merchant/getTransactionByID.go</url>
+          <line>21</line>
+          <option name="timeStamp" value="13" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DlvLineBreakpoint">
+          <url>file://$PROJECT_DIR$/internal/pkg/repository/merchant/getTransactionByID.go</url>
+          <line>22</line>
+          <option name="timeStamp" value="14" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DlvLineBreakpoint">
+          <url>file://$PROJECT_DIR$/internal/pkg/repository/merchant/getTransactionByID.go</url>
+          <line>23</line>
+          <option name="timeStamp" value="15" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DlvLineBreakpoint">
+          <url>file://$PROJECT_DIR$/internal/pkg/repository/merchant/getTransactionByID.go</url>
+          <line>24</line>
+          <option name="timeStamp" value="16" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DlvLineBreakpoint">
+          <url>file://$PROJECT_DIR$/internal/pkg/repository/merchant/getTransactionByID.go</url>
+          <line>25</line>
+          <option name="timeStamp" value="17" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DlvLineBreakpoint">
+          <url>file://$PROJECT_DIR$/internal/pkg/repository/merchant/getTransactionByID.go</url>
+          <line>28</line>
+          <option name="timeStamp" value="19" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DlvLineBreakpoint">
+          <url>file://$PROJECT_DIR$/internal/pkg/repository/merchant/getTransactionByID.go</url>
+          <line>27</line>
+          <option name="timeStamp" value="20" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DlvLineBreakpoint">
+          <url>file://$PROJECT_DIR$/internal/pkg/repository/merchant/getTransactionByID.go</url>
+          <line>26</line>
+          <option name="timeStamp" value="21" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DlvLineBreakpoint">
+          <url>file://$PROJECT_DIR$/internal/pkg/repository/merchant/getTransactionByID.go</url>
+          <line>29</line>
+          <option name="timeStamp" value="22" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DlvLineBreakpoint">
+          <url>file://$PROJECT_DIR$/internal/pkg/repository/merchant/getTransactionByID.go</url>
+          <line>30</line>
+          <option name="timeStamp" value="23" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DlvLineBreakpoint">
+          <url>file://$PROJECT_DIR$/internal/pkg/repository/merchant/getTransactionByID.go</url>
+          <line>31</line>
+          <option name="timeStamp" value="24" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DlvLineBreakpoint">
+          <url>file://$PROJECT_DIR$/internal/pkg/repository/merchant/getTransactionByID.go</url>
+          <line>32</line>
+          <option name="timeStamp" value="25" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DlvLineBreakpoint">
+          <url>file://$PROJECT_DIR$/internal/pkg/repository/merchant/getTransactionByID.go</url>
+          <line>33</line>
+          <option name="timeStamp" value="26" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DlvLineBreakpoint">
+          <url>file://$PROJECT_DIR$/internal/pkg/repository/merchant/getTransactionByID.go</url>
+          <line>34</line>
+          <option name="timeStamp" value="27" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DlvLineBreakpoint">
+          <url>file://$PROJECT_DIR$/internal/pkg/repository/merchant/getTransactionByID.go</url>
+          <line>37</line>
+          <option name="timeStamp" value="28" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DlvLineBreakpoint">
+          <url>file://$PROJECT_DIR$/internal/pkg/repository/merchant/getTransactionByID.go</url>
+          <line>38</line>
+          <option name="timeStamp" value="29" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DlvLineBreakpoint">
+          <url>file://$PROJECT_DIR$/internal/pkg/repository/merchant/getTransactionByID.go</url>
+          <line>39</line>
+          <option name="timeStamp" value="30" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DlvLineBreakpoint">
+          <url>file://$PROJECT_DIR$/internal/pkg/repository/merchant/getTransactionByID.go</url>
+          <line>42</line>
+          <option name="timeStamp" value="31" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DlvLineBreakpoint">
+          <url>file://$PROJECT_DIR$/internal/pkg/repository/merchant/getTransactionByID.go</url>
+          <line>43</line>
+          <option name="timeStamp" value="32" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DlvLineBreakpoint">
+          <url>file://$PROJECT_DIR$/internal/pkg/repository/merchant/getTransactionByID.go</url>
+          <line>44</line>
+          <option name="timeStamp" value="33" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DlvLineBreakpoint">
+          <url>file://$PROJECT_DIR$/internal/pkg/repository/merchant/getTransactionByID.go</url>
+          <line>47</line>
+          <option name="timeStamp" value="34" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DlvLineBreakpoint">
+          <url>file://$PROJECT_DIR$/internal/pkg/repository/merchant/getTransactionByID.go</url>
+          <line>45</line>
+          <option name="timeStamp" value="35" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>

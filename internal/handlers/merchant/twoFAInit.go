@@ -32,28 +32,29 @@ func (mh merchHandler) TwoFAInit() http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 		ctx := r.Context()
 		usr := &user.User{}
-
+		serviceDesc := "Two-FA-Init-Handler"
+		requestID := fmt.Sprintf("%v", r.Context().Value(utils.CTXRequestID))
 		token := r.Header.Get("token")
 		if len(token) == 0 {
+			go utils.Logger(ctx, mh.Logger.Error, requestDesc, serviceDesc, requestID, response.TokenIsEmpty)
 			response.ToJson(w, http.StatusSeeOther, response.TokenIsEmpty)
 			return
 		}
-
 		client := gocloak.NewClient(mh.svc.ConfigInstance().GetString("api.keycloak.server"))
-
 		userInfo, err := client.GetUserInfo(ctx, token, mh.svc.ConfigInstance().GetString("api.keycloak.realm"))
-
 		if err != nil {
+			go utils.Logger(ctx, mh.Logger.Error, requestDesc, serviceDesc, requestID, user.SetError(err))
 			response.ToJson(w, http.StatusSeeOther, user.SetError(err))
 			return
 		}
-
-		requestID := fmt.Sprintf("%v", r.Context().Value(utils.CTXRequestID))
 		usr.Phone = fmt.Sprintf("%s%s", phonePrefix, *userInfo.PreferredUsername)
+
+		go utils.Logger(ctx, mh.Logger.Info, requestDesc, serviceDesc, requestID, usr.Phone)
 
 		userAttr, err := client.GetUserByID(ctx, token, mh.svc.ConfigInstance().GetString("api.keycloak.realm"), *userInfo.Sub)
 
 		if err != nil {
+			go utils.Logger(ctx, mh.Logger.Error, requestDesc, serviceDesc, requestID, user.SetError(err))
 			response.ToJson(w, http.StatusSeeOther, user.SetError(err))
 			return
 		}
@@ -82,11 +83,13 @@ func (mh merchHandler) TwoFAInit() http.HandlerFunc {
 		if usr.Security.TwoFA.Gauth.IsActive || usr.Security.TwoFA.SMSotp.IsActive {
 			usrJSON, err := json.Marshal(usr)
 			if err != nil {
+				go utils.Logger(ctx, mh.Logger.Error, requestDesc, serviceDesc, requestID, err.Error())
 				response.ToJson(w, http.StatusSeeOther, err)
 				return
 			}
 			err = mh.svc.RedisInstance().Set(ctx, requestID, string(usrJSON), mh.svc.ConfigInstance().GetDuration("api.server.sessionExpirition")*time.Second)
 			if err != nil {
+				go utils.Logger(ctx, mh.Logger.Error, requestDesc, serviceDesc, requestID, err.Error())
 				response.ToJson(w, http.StatusSeeOther, err)
 				return
 			}
@@ -94,6 +97,9 @@ func (mh merchHandler) TwoFAInit() http.HandlerFunc {
 		resp := response.WaitingForConfirm
 		secure.TwoFA.Gauth.GauthSecretEndpoint = ""
 		resp.AditionalInfo = secure
+
+		go utils.Logger(ctx, mh.Logger.Info, responseDesc, serviceDesc, requestID, resp)
+
 		response.ToJson(w, http.StatusOK, resp)
 
 	}

@@ -50,7 +50,7 @@ func NewRouter(d dependencies) {
 	generalMiddleware := []mux.MiddlewareFunc{
 		d.MW.Cors,
 		d.MW.SetRequestID,
-		d.MW.Log,
+		//d.MW.Log,
 	}
 
 	// auth routes
@@ -70,6 +70,9 @@ func NewRouter(d dependencies) {
 	merchantPath := routeVer.PathPrefix("/merchant").Subrouter()
 	merchantPath.Use(generalMiddleware...)
 	merchantPath.HandleFunc("/2fa-init", d.Merch.TwoFAInit()).Methods("GET", "OPTIONS")
+	merchantPath.Path("/get-transaction-by-id").
+		Queries("transId", "{transId}").
+		HandlerFunc(d.Merch.GetTransactionByID()).Methods("GET", "OPTIONS")
 	merchantPath.Path("/get-transactions").
 		Queries("dateFrom", "{dateFrom}").
 		Queries("dateTo", "{dateTo}").

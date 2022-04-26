@@ -441,6 +441,53 @@ const docTemplate = `{
                 }
             }
         },
+        "/merchant/get-transaction-by-id": {
+            "get": {
+                "description": "GetTransactionByID",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Merchant"
+                ],
+                "summary": "GetTransactionByID route",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "format": "UUID",
+                        "description": " ",
+                        "name": "token",
+                        "in": "header",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "format": "json",
+                        "description": " ",
+                        "name": "transId",
+                        "in": "query",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/models.GetTransactionByIdResponse"
+                        }
+                    },
+                    "303": {
+                        "description": "See Other",
+                        "schema": {
+                            "$ref": "#/definitions/models.ErrorResponse"
+                        }
+                    }
+                }
+            }
+        },
         "/merchant/get-transactions": {
             "get": {
                 "description": "GetTransactions",
@@ -525,6 +572,38 @@ const docTemplate = `{
                     "type": "string"
                 },
                 "sellRate": {
+                    "type": "string"
+                }
+            }
+        },
+        "merchant.Transaction": {
+            "type": "object",
+            "properties": {
+                "accFrom": {
+                    "type": "string"
+                },
+                "accTo": {
+                    "type": "string"
+                },
+                "amount": {
+                    "type": "string"
+                },
+                "createdDate": {
+                    "type": "string"
+                },
+                "paymentPurpose": {
+                    "type": "string"
+                },
+                "proceedDate": {
+                    "type": "string"
+                },
+                "recipientName": {
+                    "type": "string"
+                },
+                "transId": {
+                    "type": "string"
+                },
+                "transType": {
                     "type": "string"
                 }
             }
@@ -665,6 +744,20 @@ const docTemplate = `{
                 },
                 "msg": {
                     "$ref": "#/definitions/models.ErrorModel"
+                }
+            }
+        },
+        "models.GetTransactionByIdResponse": {
+            "type": "object",
+            "properties": {
+                "msg": {
+                    "$ref": "#/definitions/models.ErrorModel"
+                },
+                "transId": {
+                    "type": "string"
+                },
+                "trnList": {
+                    "$ref": "#/definitions/merchant.Transaction"
                 }
             }
         },

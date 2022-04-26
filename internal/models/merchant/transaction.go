@@ -12,3 +12,15 @@ type Transactions struct {
 	DocState      string `json:"docState"`
 	Amount        string `json:"summa"`
 }
+
+type Transaction struct {
+	CreatedDate    string `json:"createdDate"`
+	ProceedDate    string `json:"proceedDate"`
+	AccFrom        string `json:"accFrom"`
+	AccTo          string `json:"accTo"`
+	TransId        string `json:"transId"`
+	TransType      string `json:"transType"`
+	RecipientName  string `json:"recipientName"`
+	PaymentPurpose string `json:"paymentPurpose"`
+	Amount         string `json:"amount"`
+}

@@ -1,9 +1,15 @@
 package authentication
 
 import (
+	"b2b-api/internal/pkg/logger"
 	"b2b-api/internal/pkg/service"
 	"go.uber.org/fx"
 	"net/http"
+)
+
+const (
+	requestDesc  = "request"
+	responseDesc = "response"
 )
 
 var NewAuthHandler = fx.Provide(newAuthHandler)
@@ -18,13 +24,18 @@ type IAuthHandler interface {
 
 type dependencies struct {
 	fx.In
-	SVC service.IService
+	SVC    service.IService
+	Logger logger.ILogger
 }
 
 type authHandler struct {
-	svc service.IService
+	svc    service.IService
+	Logger logger.ILogger
 }
 
 func newAuthHandler(d dependencies) IAuthHandler {
-	return authHandler{svc: d.SVC}
+	return authHandler{
+		svc:    d.SVC,
+		Logger: d.Logger,
+	}
 }
