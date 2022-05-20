@@ -1,0 +1,751 @@
+basePath: /api/v1
+definitions:
+  merchant.Account:
+    properties:
+      currency:
+        type: string
+      name:
+        type: string
+    type: object
+  merchant.AccountDetailsForBankTrans:
+    properties:
+      key:
+        type: string
+      value:
+        type: string
+    type: object
+  merchant.Accounts:
+    properties:
+      account:
+        type: string
+      balance:
+        type: string
+      currency:
+        type: string
+      currencySym:
+        type: string
+      id:
+        type: string
+      type:
+        type: string
+    type: object
+  merchant.Amount:
+    properties:
+      currencySymbol:
+        type: string
+      value:
+        type: number
+    type: object
+  merchant.ConversionResponse:
+    properties:
+      accountFrom:
+        $ref: '#/definitions/merchant.Account'
+      accountTo:
+        $ref: '#/definitions/merchant.Account'
+      amountFrom:
+        $ref: '#/definitions/merchant.Amount'
+      amountTo:
+        $ref: '#/definitions/merchant.Amount'
+      createDate:
+        type: string
+      documentNumber:
+        type: string
+      executionDate:
+        type: string
+      footnote:
+        type: string
+      id:
+        type: string
+      rate:
+        type: string
+      signature:
+        items:
+          $ref: '#/definitions/merchant.Signature'
+        type: array
+    type: object
+  merchant.ConvertedValue:
+    properties:
+      rate:
+        type: string
+      value:
+        type: number
+    type: object
+  merchant.FilterHistoryTransaction:
+    properties:
+      account:
+        items:
+          type: string
+        type: array
+      fromDate:
+        type: string
+      pagination:
+        properties:
+          count:
+            type: integer
+          currentPage:
+            type: integer
+        type: object
+      toDate:
+        type: string
+    type: object
+  merchant.GroupOfTransactions:
+    properties:
+      groupDate:
+        type: string
+      transactions:
+        items:
+          $ref: '#/definitions/merchant.Transaction'
+        type: array
+    type: object
+  merchant.Rates:
+    properties:
+      buyRate:
+        type: string
+      currency:
+        type: string
+      sellRate:
+        type: string
+    type: object
+  merchant.Signature:
+    properties:
+      fullName:
+        type: string
+      role:
+        type: string
+      status:
+        type: string
+    type: object
+  merchant.Transaction:
+    properties:
+      createdAt:
+        description: DateProcess
+        type: string
+      documentNumber:
+        type: string
+      fromAccount:
+        properties:
+          amount:
+            properties:
+              currencySymbol:
+                type: string
+              value:
+                description: Amount
+                type: string
+            type: object
+          imageName:
+            type: string
+          number:
+            description: Acc??Number
+            type: string
+          title:
+            description: senderName
+            type: string
+        type: object
+      id:
+        description: Это DocId
+        type: string
+      paymentPurpose:
+        description: nazn
+        type: string
+      proceededAt:
+        type: string
+      status:
+        description: Это DocState
+        type: string
+      toAccount:
+        properties:
+          number:
+            description: Acc??Number
+            type: string
+          title:
+            description: RecipientName
+            type: string
+        type: object
+      type:
+        description: TransType
+        type: string
+    type: object
+  models.AccountDetailsForBankTrans:
+    properties:
+      local:
+        items:
+          $ref: '#/definitions/merchant.AccountDetailsForBankTrans'
+        type: array
+      msg:
+        $ref: '#/definitions/models.ErrorModel'
+    type: object
+  models.ConversionRequest:
+    properties:
+      accFrom:
+        type: string
+      accTo:
+        type: string
+      amount:
+        type: number
+      docNumber:
+        type: string
+      executionDate:
+        type: string
+      footnote:
+        type: string
+      rate:
+        type: number
+    type: object
+  models.ConversionResponse:
+    properties:
+      msg:
+        $ref: '#/definitions/models.ErrorModel'
+      transaction:
+        $ref: '#/definitions/merchant.ConversionResponse'
+    type: object
+  models.ConvertedValueResponse:
+    properties:
+      convertedValue:
+        $ref: '#/definitions/merchant.ConvertedValue'
+      msg:
+        $ref: '#/definitions/models.ErrorModel'
+    type: object
+  models.ErrorModel:
+    properties:
+      errorCode:
+        type: integer
+      errorDescription:
+        type: string
+    type: object
+  models.ErrorResponse:
+    properties:
+      errorCode:
+        type: integer
+      errorDescription:
+        type: string
+      response: {}
+    type: object
+  models.GetAccountsResponse:
+    properties:
+      accounts:
+        $ref: '#/definitions/merchant.Accounts'
+      merchName:
+        type: string
+      msg:
+        $ref: '#/definitions/models.ErrorModel'
+    type: object
+  models.GetAllAmountsResponse:
+    properties:
+      balance:
+        type: number
+      merchName:
+        type: string
+      msg:
+        $ref: '#/definitions/models.ErrorModel'
+    type: object
+  models.GetExchangeRatesResponse:
+    properties:
+      base:
+        type: string
+      msg:
+        $ref: '#/definitions/models.ErrorModel'
+      rates:
+        $ref: '#/definitions/merchant.Rates'
+    type: object
+  models.GetLimitConversion:
+    properties:
+      currentLimit:
+        type: number
+      msg:
+        $ref: '#/definitions/models.ErrorModel'
+    type: object
+  models.HistoryOfTransactionsResponse:
+    properties:
+      groups:
+        items:
+          $ref: '#/definitions/merchant.GroupOfTransactions'
+        type: array
+      msg:
+        $ref: '#/definitions/models.ErrorModel'
+    type: object
+  models.Login:
+    properties:
+      password:
+        type: string
+      phone:
+        maxLength: 9
+        minLength: 9
+        type: string
+    type: object
+  models.LoginResponse:
+    properties:
+      msg:
+        $ref: '#/definitions/models.ErrorModel'
+      response:
+        $ref: '#/definitions/models.twoFa'
+    type: object
+  models.OTP:
+    properties:
+      expirition:
+        type: integer
+      isActive:
+        type: boolean
+      totalSent:
+        type: integer
+    type: object
+  models.Token:
+    properties:
+      refreshToken:
+        type: string
+      role:
+        type: string
+      token:
+        type: string
+    type: object
+  models.googleAuth:
+    properties:
+      isActive:
+        type: boolean
+    type: object
+  models.smsOTP:
+    properties:
+      isActive:
+        type: boolean
+    type: object
+  models.twoFa:
+    properties:
+      googleAuthenticator:
+        $ref: '#/definitions/models.googleAuth'
+      smsOtp:
+        $ref: '#/definitions/models.smsOTP'
+    type: object
+host: localhost:8070
+info:
+  contact: {}
+  description: This is a B2B-API server.
+  title: B2B Example API
+  version: "1.0"
+paths:
+  /2fa/confirm-google-totp:
+    get:
+      description: Google-Authenticator Confirmation
+      parameters:
+      - description: ' '
+        format: UUID
+        in: header
+        name: X-Request-Id
+        required: true
+        type: string
+      - description: ' '
+        format: uint
+        in: header
+        name: otp
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.Token'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/models.ErrorResponse'
+      summary: Google-Authenticator Confirmation route
+      tags:
+      - 2FA
+  /2fa/confirm-sms-otp:
+    get:
+      description: SMS Confirmation
+      parameters:
+      - description: ' '
+        format: UUID
+        in: header
+        name: X-Request-Id
+        required: true
+        type: string
+      - description: ' '
+        format: uint
+        in: header
+        name: otp
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.Token'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/models.ErrorResponse'
+      summary: SMS Confirmation route
+      tags:
+      - 2FA
+  /2fa/send-sms-otp:
+    get:
+      description: SMS sender
+      parameters:
+      - description: ' '
+        format: UUID
+        in: header
+        name: X-Request-Id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.OTP'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/models.ErrorResponse'
+      summary: SMS sender route
+      tags:
+      - 2FA
+  /auth/login:
+    post:
+      consumes:
+      - application/json
+      description: Authentication
+      parameters:
+      - description: authentication
+        format: json
+        in: body
+        name: authentication
+        required: true
+        schema:
+          $ref: '#/definitions/models.Login'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.LoginResponse'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/models.ErrorResponse'
+      summary: Authentication route
+      tags:
+      - Authentication
+  /auth/refresh-token:
+    get:
+      consumes:
+      - application/json
+      description: RefreshToken
+      parameters:
+      - description: ' '
+        format: UUID
+        in: header
+        name: refreshToken
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.Token'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/models.ErrorResponse'
+      summary: RefreshToken route
+      tags:
+      - Authentication
+  /merchant/confirm-transaction:
+    get:
+      consumes:
+      - application/json
+      description: ConfirmTransaction
+      parameters:
+      - description: ' '
+        format: UUID
+        in: header
+        name: token
+        required: true
+        type: string
+      - description: ' '
+        format: json
+        in: query
+        name: transactionId
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.LoginResponse'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/models.ErrorResponse'
+      summary: ConfirmTransaction route
+      tags:
+      - Merchant
+  /merchant/conversion:
+    post:
+      consumes:
+      - application/json
+      description: Conversion
+      parameters:
+      - description: ' '
+        format: UUID
+        in: header
+        name: token
+        required: true
+        type: string
+      - description: conversion
+        format: json
+        in: body
+        name: conversion
+        required: true
+        schema:
+          $ref: '#/definitions/models.ConversionRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.ConversionResponse'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/models.ErrorResponse'
+      summary: Conversion route
+      tags:
+      - Merchant
+  /merchant/get-account-details:
+    get:
+      consumes:
+      - application/json
+      description: GetAccountDetails
+      parameters:
+      - description: ' '
+        format: UUID
+        in: header
+        name: token
+        required: true
+        type: string
+      - description: ' '
+        format: json
+        in: query
+        name: accountNumber
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.AccountDetailsForBankTrans'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/models.ErrorResponse'
+      summary: GetAccountDetails route
+      tags:
+      - Merchant
+  /merchant/get-accounts:
+    get:
+      consumes:
+      - application/json
+      description: GetAccounts
+      parameters:
+      - description: ' '
+        format: UUID
+        in: header
+        name: token
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.GetAccountsResponse'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/models.ErrorResponse'
+      summary: GetAccounts route
+      tags:
+      - Merchant
+  /merchant/get-all-amount:
+    get:
+      consumes:
+      - application/json
+      description: GetAllAmount
+      parameters:
+      - description: ' '
+        format: UUID
+        in: header
+        name: token
+        required: true
+        type: string
+      - description: ' '
+        format: json
+        in: query
+        name: currency
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.GetAllAmountsResponse'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/models.ErrorResponse'
+      summary: GetAllAmount route
+      tags:
+      - Merchant
+  /merchant/get-converted-value:
+    get:
+      consumes:
+      - application/json
+      description: GetConvertedValue
+      parameters:
+      - description: ' '
+        format: UUID
+        in: header
+        name: token
+        required: true
+        type: string
+      - description: ' '
+        format: json
+        in: query
+        name: value
+        required: true
+        type: number
+      - description: ' '
+        format: json
+        in: query
+        name: currencyFrom
+        required: true
+        type: string
+      - description: ' '
+        format: json
+        in: query
+        name: currencyTo
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.ConvertedValueResponse'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/models.ErrorResponse'
+      summary: GetConvertedValue route
+      tags:
+      - Merchant
+  /merchant/get-limit-conversion:
+    get:
+      consumes:
+      - application/json
+      description: GetLimitConversion
+      parameters:
+      - description: ' '
+        format: UUID
+        in: header
+        name: token
+        required: true
+        type: string
+      - description: ' '
+        format: json
+        in: query
+        name: currency
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.GetLimitConversion'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/models.ErrorResponse'
+      summary: GetLimitConversion route
+      tags:
+      - Merchant
+  /merchant/get-rates:
+    get:
+      consumes:
+      - application/json
+      description: GetExchangeRates
+      parameters:
+      - description: ' '
+        format: UUID
+        in: header
+        name: token
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.GetExchangeRatesResponse'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/models.ErrorResponse'
+      summary: GetExchangeRates route
+      tags:
+      - Merchant
+  /merchant/transactions:
+    post:
+      consumes:
+      - application/json
+      description: GetHistoryOfTransactions
+      parameters:
+      - description: ' '
+        format: UUID
+        in: header
+        name: token
+        required: true
+        type: string
+      - description: history filters
+        format: json
+        in: body
+        name: filters
+        required: true
+        schema:
+          $ref: '#/definitions/merchant.FilterHistoryTransaction'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.HistoryOfTransactionsResponse'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/models.ErrorResponse'
+      summary: GetHistoryOfTransactions route
+      tags:
+      - Merchant
+swagger: "2.0"

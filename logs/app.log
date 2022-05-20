@@ -1,0 +1,10 @@
+2022-05-20T14:57:11.119+0500	INFO	oracle/oracle.go:33	Connection success: ibs/ibsibs@192.168.0.223/work
+2022-05-20T14:57:11.516+0500	INFO	router/router.go:108	Application started
+2022-05-20T14:57:58.745+0500	INFO	utils/utils.go:24	request -> Authentication ::: 6203fbc3-6f3a-476f-80bd-03a74ceac670 --> [User is: 904444047]
+2022-05-20T14:57:59.310+0500	INFO	utils/utils.go:24	response -> Authentication ::: 6203fbc3-6f3a-476f-80bd-03a74ceac670 --> [{"errorCode":9,"errorDescription":"Login successful. Waiting for OTP...","response":{"2FA":{"googleAuthenticator":{"isActive":false},"smsOtp":{"isActive":true}}}}]
+2022-05-20T14:58:09.086+0500	INFO	utils/utils.go:24	request -> Send-Sms-Otp ::: 6203fbc3-6f3a-476f-80bd-03a74ceac670 --> []
+2022-05-20T14:58:20.790+0500	INFO	utils/utils.go:24	request -> Sms-Otp-Confirmation ::: 6203fbc3-6f3a-476f-80bd-03a74ceac670 --> []
+2022-05-20T14:58:20.790+0500	INFO	utils/utils.go:24	request -> Session-Insert-Repository ::: 829df238-c3d4-45c3-adcc-667b4733e6ad --> [992904444047]
+2022-05-20T14:58:20.823+0500	INFO	utils/utils.go:24	response -> Session-Insert-Repository ::: 829df238-c3d4-45c3-adcc-667b4733e6ad --> [{"errorCode":102,"errorDescription":"Login not found"}]
+2022-05-20T15:08:35.616+0500	INFO	utils/utils.go:24	request -> Sms-Otp-Confirmation ::: 6203fbc3-6f3a-476f-80bd-03a74ceac670 --> []
+2022-05-20T15:08:47.456+0500	INFO	router/router.go:113	Application stopped

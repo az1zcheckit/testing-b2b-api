@@ -1,0 +1,36 @@
+{
+  "api": {
+    "server": {
+      "port": ":8070",
+      "connectionCheckTime":10,
+      "sessionExpirition": 300
+    },
+    "otp": {
+      "otpMaxPerSession": 3,
+      "otpExpirition": 60,
+      "otpDigits": 6,
+      "otpText": "Никому не говорите код %s! Вход в Хумо Бизнес в %s"
+    },
+    "oracle": {
+      "tns": "ibs/ibsibs@192.168.0.223/work"
+    },
+    "swagger": {
+      "url":"http://localhost:8070/api/v1/swagger/doc.json"
+    },
+    "keycloak": {
+      "server": "http://192.168.150.185:8080",
+      "clientID": "api-client",
+      "clientSecret": "8CsWC2KmQEHEeA5CJWqOWHLmnR1VTFk3",
+      "realm": "master"
+    },
+    "smsc": {
+      "server": "http://192.168.0.88:13003/cgi-bin/sendsms?user=humo_megafon&pass=humo_megafon_2016&to=%s&coding=2&charset=utf-8&text=%s"
+    },
+    "logger": {
+      "debug": true,
+      "info": true,
+      "error": true,
+      "warning": true
+    }
+  }
+}
